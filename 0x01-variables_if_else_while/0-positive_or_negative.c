@@ -12,15 +12,15 @@ int main(void)
 	/* your code goes there */
 	if (n > 0)
 	{
-		pintf("%d positive \n", n);
+		pintf("%d positive\n", n);
 	}
-	if (n == 0)
+	else if (n == 0)
 	{
-		printf("%d zero \n", n);
+		printf("%d zero\n", n);
 	}
-	if (n < 0)
+	else
 	{
-		printf("%d negative \n", n);
+		printf("%d negative\n", n);
 	}
 	return (0);
 }
