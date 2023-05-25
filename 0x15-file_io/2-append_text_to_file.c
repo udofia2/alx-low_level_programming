@@ -9,32 +9,27 @@
  *         If the file does not exist the user lacks write permissions - -1.
  *         Otherwise - 1.
  */
-
 int append_text_to_file(const char *filename, char *text_content)
 {
-        int fd, to_write, s = 0;
+	int o, w, len = 0;
 
-        /* Checks if filename is NULL  and return -1 */
-        if (!filename)
-                return (-1);
+	if (filename == NULL)
+		return (-1);
 
-        /* Opens file in append mode */
-        fd = open(filename, O_WRONLY | O_APPEND);
-        if (fd < 0)
-                return (-1);
+	if (text_content != NULL)
+	{
+		for (len = 0; text_content[len];)
+			len++;
+	}
 
-        if (text_content)
-        {
-                /* Write text_content to file */
-                while (text_content[s])
-                        s++;
-                /* Checks if writing to the file failed */
-                to_write = write(fd, text_content, s);
-                if (to_write != s)
-                        return (-1);
-        }
+	o = open(filename, O_WRONLY | O_APPEND);
+	w = write(o, text_content, len);
 
-        close(fd);
+	if (o == -1 || w == -1)
+		return (-1);
 
-        return (1);
+	close(o);
+
+	return (1);
 }
+
